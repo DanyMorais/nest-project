@@ -33,9 +33,7 @@ export class PersonsService {
     }
 
     getAll(): Array<Person> {
-
         return this.listOfPersons;
-
     }
 
     add(newPerson: Person): Person {
@@ -43,5 +41,32 @@ export class PersonsService {
         this.listOfPersons.push(newPerson);
         return newPerson;
     }
+
+    get(id: number): Person {
+        for (let person of this.listOfPersons) {
+            if (person.id == id) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    updatePerson( id: number, updatedPerson: Person): Person {
+
+        for (let person of this.listOfPersons) {
+            if (id == person.id) {
+                person.name = updatedPerson.name;
+                person.phone = updatedPerson.phone;
+                return person;
+            }
+        }
+        return null;
+    }
     
+    delete(id: number){
+        for(let i=0; i<this.listOfPersons.length; i++){
+            if(this.listOfPersons[i].id == id)
+                this.listOfPersons.splice(i,1);
+        }
+    }
 }
